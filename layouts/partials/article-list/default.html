@@ -1,4 +1,14 @@
 {{ $image := partialCached "helper/image" (dict "Context" . "Type" "articleList") .RelPermalink "articleList" }}
 <article class="{{ if $image.exists }}has-image{{ end }}">
     {{ partial "article/components/header" . }}
+        <div class="article-summary">
+          {{.Summary}}
+          {{ if .Truncated }}
+          <!-- This <div> includes a read more link, but only if the summary is truncated... -->
+          <div>
+            <a href="{{ .RelPermalink }}">Read More…</a>
+          </div>
+          {{ end }}
+
+        </div>
 </article>
