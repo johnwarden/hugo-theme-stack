@@ -36,5 +36,14 @@
                 {{ end }}
             </div>
         {{ end }}
+
+        <div class="article-summary">
+          {{.Summary}}
+          {{ if .Truncated }}
+          <!-- This <div> includes a read more link, but only if the summary is truncated... -->
+          {{ end }}
+
+        </div>
+
     </a>
 </article>

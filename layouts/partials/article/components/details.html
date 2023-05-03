@@ -3,11 +3,16 @@
     <header class="article-category">
         {{ range (.GetTerms "categories") }}
             <a href="{{ .RelPermalink }}" {{ with .Params.style }}style="background-color: {{ .background }}; color: {{ .color }};"{{ end }}>
-                {{ .LinkTitle }}
+                {{ .Title }}
             </a>
         {{ end }}
     </header>
     {{ end }}
+
+    {{ partial "article/components/tags" . }}
+
+
+
 
     <div class="article-title-wrapper">
         <h2 class="article-title">

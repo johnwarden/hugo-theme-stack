@@ -24,13 +24,21 @@
 {{ end }}
 
 {{ define "main" }}
+    {{- if .Params.series -}}
+      {{- with index (.GetTerms "series") 0 -}}
+        <div class="notice--info">
+          <p>This post is part of the <a href="{{ .Permalink }}" style="font-weight: bold">{{ .LinkTitle }}</a> series.</p>
+        </div>
+      {{- end -}}
+    {{- end -}}
+
     {{ partial "article/article.html" . }}
 
     {{ if .Params.links }}
         {{ partial "article/components/links" . }}
     {{ end }}
 
-    {{ partial "article/components/related-content" . }}
+<!--    {{ partial "article/components/related-content" . }}-->
      
     {{ if not (eq .Params.comments false) }}
         {{ partial "comments/include" . }}

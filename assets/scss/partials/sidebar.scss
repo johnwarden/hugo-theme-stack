@@ -93,6 +93,10 @@
         padding: 0;
     }
 
+    .site-logo {
+        margin: 0;
+    }
+
     .site-avatar {
         position: relative;
         margin: 0;
@@ -140,10 +144,10 @@
     }
 
     .site-description {
-        color: var(--body-text-color);
+        color: var(--accent-color);
         font-weight: normal;
         margin: 0;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
 
         @include respond(2xl) {
             font-size: 1.6rem;

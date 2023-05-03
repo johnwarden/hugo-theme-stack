@@ -6,6 +6,32 @@
     </button>
 
     <header>
+
+        {{ with .Site.Params.sidebar.logo }}
+            {{ if (default true .enabled) }}
+            <figure class="site-logo">
+                <a href="{{ .Site.BaseURL | relLangURL }}">
+                {{ if not .local }}
+                    <img src="{{ .src }}" width="200px" class="site-logo" loading="lazy" alt="Logo">
+                {{ else }}
+                    {{ $logo := resources.Get (.src) }}
+                    
+                    {{ if $logo }}
+                        {{ $logoResized := $logo.Resize "300x" }}
+                        <img src="{{ $logoResized.RelPermalink }}" width="{{ $logoResized.Width }}"
+                            height="{{ $logoResized.Height }}" class="site-logo" loading="lazy" alt="Logo">
+                    {{ else }}
+                        {{ errorf "Failed loading logo from %q" . }}
+                    {{ end }}
+                {{ end }}
+                </a>
+                {{ with $.Site.Params.sidebar.emoji }}
+                    <span class="emoji">{{ . }}</span>
+                {{ end }}
+            </figure>
+            {{ end }}
+        {{ end }}
+
         {{ with .Site.Params.sidebar.avatar }}
             {{ if (default true .enabled) }}
             <figure class="site-avatar">
@@ -32,7 +58,9 @@
         {{ end }}
         
         <div class="site-meta">
+            {{ if not .Site.Params.sidebar.logo.enabled }}
             <h1 class="site-name"><a href="{{ .Site.BaseURL | relLangURL }}">{{ .Site.Title }}</a></h1>
+            {{end}}
             <h2 class="site-description">{{ .Site.Params.sidebar.subtitle }}</h2>
         </div>
     </header>
