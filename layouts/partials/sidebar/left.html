@@ -17,9 +17,9 @@
                     {{ $logo := resources.Get (.src) }}
                     
                     {{ if $logo }}
-                        {{ $logoResized := $logo.Resize "300x" }}
-                        <img src="{{ $logoResized.RelPermalink }}" width="{{ $logoResized.Width }}"
-                            height="{{ $logoResized.Height }}" class="site-logo" loading="lazy" alt="Logo">
+                        <!-- {{ $logoResized := $logo.Resize "400x" }} -->
+                        <img src="{{ $logo.RelPermalink }}" width="200"
+                            class="site-logo" loading="lazy" alt="Logo">
                     {{ else }}
                         {{ errorf "Failed loading logo from %q" . }}
                     {{ end }}
