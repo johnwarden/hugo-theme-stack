@@ -13,13 +13,21 @@
 
 
 
-
     <div class="article-title-wrapper">
         <h2 class="article-title">
             <a href="{{ .RelPermalink }}">
                 {{- .Title -}}
             </a>
         </h2>
+
+    {{- if .Params.series -}}
+      {{- with index (.GetTerms "series") 0 -}}
+        <h3 class="article-series-subtitle">
+          Part of the <a href="{{ .Permalink }}" style="font-weight: bold">{{ .LinkTitle }}</a> series
+        </h3>
+      {{- end -}}
+    {{- end -}}
+
     
         {{ with .Params.description }}
         <h3 class="article-subtitle">
