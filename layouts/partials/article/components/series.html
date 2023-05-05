@@ -1,20 +1,32 @@
 {{- if .Params.series -}}
+
   <section class="article-series">
 
     {{- $series := where .Site.RegularPages.ByDate ".Params.series" "intersect" .Params.series -}}
-    {{- with $series -}}
-    <h3 id="series">This series</h3>
-    <ol>
-        {{- range . -}}
-        <li>
+    {{- $series1 := where .Site.RegularPages.ByDate ".Params.series" "intersect" .Params.series -}}
+
+
+        {{- range $i, $item := $series -}}
+
             {{- if eq .File.UniqueID $.File.UniqueID -}}
-                <b>{{ .Title }}</b>
-            {{- else -}}
-                <a href="{{ .Permalink }}">{{ .Title }}</a>
+
+
+                {{- range $j, $item1 := $series1 -}}
+
+                    {{- if (eq $j (add $i 1)) -}}
+                        {{- with $item1 -}}
+                        <h3>Next in This Series</h2>
+                        <span class="series-item {{if eq .File.UniqueID .File.UniqueID}}current{{end}}">
+                             <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </span>
+                        {{- end -}}
+                    {{- end -}}
+                {{- end -}}
             {{- end -}}
-        </li>
+
         {{- end -}}
-    </ol>
-    {{- end -}}
+    
+
   </section>
 {{- end -}}
+

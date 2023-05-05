@@ -1,0 +1,29 @@
+{{- $context := .Context -}}
+{{- if $context.Params.series -}}
+
+  <section class="widget">
+    <h2 class="widget-title section-title">In This Series</h2>
+
+    <div class="widget--series">
+        {{- $series := where $context.Site.RegularPages.ByDate ".Params.series" "intersect" $context.Params.series -}}
+        {{- with $series -}}
+        <ol>
+            {{- range . -}}
+            <li>
+                {{- if eq $context.File.UniqueID .File.UniqueID -}}
+                    <b>{{ .Title }}</b>
+                {{- else -}}
+                    <a href="{{ .Permalink }}">{{ .Title }}</a>
+                {{- end -}}
+            </li>
+            {{- end -}}
+        </ol>
+    </div>
+    {{- end -}}
+  </section>
+{{- end -}}
+
+
+
+
+
