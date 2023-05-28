@@ -1,3 +1,5 @@
+{{ $pageSection := site.GetPage "section" .Section}}
+
 <aside class="sidebar left-sidebar sticky {{ if .Site.Params.sidebar.compact }}compact{{ end }}">
     <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="{{ T `toggleMenu` }}">
         <span class="hamburger-box">
@@ -103,10 +105,29 @@
         </li>
         {{ end }}
 
-                {{ partial "widget/tag-cloud" (dict "Context" . "limit" 10) }}
+     {{ range where .Site.Sections "Type" "not in" ("pages") }}
+          {{$active := eq $pageSection .}}
+
+        <li {{ if $active }} class='current' {{ end }}>
+                <a href="{{ .Permalink }}">
+                {{ if .Params.icon }}
+                {{ partial "helper/icon" .Params.icon }}
+                {{ end }}
+
+                <span>
 
 
+                {{- if eq $pageSection . -}}
+                    <b>{{ .Title }}</b>
+                {{- else -}}
+                    {{.Title}}
+                {{- end -}}
 
+                </span>
+                </a>
+
+            </li>
+            {{- end -}}
 
         <div class="menu-bottom-section">
             {{- $currentLanguageCode := .Language.Lang -}}
