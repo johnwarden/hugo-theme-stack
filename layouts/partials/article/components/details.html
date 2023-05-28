@@ -59,12 +59,14 @@
             </div>
         {{ end }}
 
+        {{ if .Params.Author }}
             <div>
                 {{ partial "helper/icon" "user" }}
                 <time class="article-time--author">
-                    Jonathan Warden
+                    {{ .Params.Author }}
                 </time>
             </div>
+        {{ end }}
 
 
     </footer>
