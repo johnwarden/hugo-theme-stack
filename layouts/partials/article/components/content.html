@@ -2,4 +2,17 @@
     <!-- Refer to https://discourse.gohugo.io/t/responsive-tables-in-markdown/10639/5 -->
     {{ $wrappedTable := printf "<div class=\"table-wrapper\">${1}</div>" }}
     {{ .Content | replaceRE "(<table>(?:.|\n)+?</table>)" $wrappedTable | safeHTML }}
+
+    {{ if .Params.canonical_url }}
+        {{ $url := urls.Parse .Params.canonical_url }}
+
+        {{ $siteURL := urls.Parse .Site.BaseURL  }}
+
+
+        {{ if (ne $url.Host $siteURL.Host) }}
+            <em>Originally posted on <a href="{{ .Params.canonical_url }}">{{ $url.Host }}</a>.</em>
+        {{ end }}
+
+    {{ end }}
+
 </section>
