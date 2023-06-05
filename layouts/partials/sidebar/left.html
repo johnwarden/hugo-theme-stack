@@ -105,7 +105,10 @@
         </li>
         {{ end }}
 
-     {{ range where .Site.Sections "Type" "not in" ("pages") }}
+    {{ $p1 := where .Site.Sections "Type" "not in" ("pages")  }}
+    {{ $p2 := where $p1 "Type" "not in" ("posts")  }}
+
+    {{ range $p2 }}
           {{$active := eq $pageSection .}}
 
         <li {{ if $active }} class='current' {{ end }}>
