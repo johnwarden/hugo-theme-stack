@@ -1,8 +1,9 @@
 {{- $context := .Context -}}
 {{- if $context.Params.series -}}
 
-  <section class="widget">
-    <h2 class="widget-title section-title">In This Series</h2>
+  <section class="widget series">
+
+    <h2 class="widget-title section-title">The <a href='{{- (index ($context.GetTerms "series") 0).Permalink -}}'>{{ index $context.Params.series 0 }}</a> Series</a></h2>
 
     <div class="widget--series">
         {{ $series := index site.Taxonomies "series" (urlize (index $context.Params.series 0)) }}

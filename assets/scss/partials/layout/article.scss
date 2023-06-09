@@ -170,6 +170,11 @@
     }
 }
 
+.widget.series .widget-title a {
+    font-weight: bolder;
+    color: black
+}
+
 .widget--series {
     background-color: var(--card-background);
     border-radius: var(--card-border-radius);
