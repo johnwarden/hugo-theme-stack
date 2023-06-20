@@ -19,8 +19,14 @@
                 {{ with .Params.description }}
                     <h2 class="section-description">{{ . }}</h2>
                 {{ end }}
+
+                {{ if .Content }}
+                    <div>
+                    {{ .Content }}
+                    </div>
+                {{ end }}
             </div>
-    
+
             {{- $image := partialCached "helper/image" (dict "Context" . "Type" "section") .RelPermalink "section" -}}
             {{ if $image.exists }}
                 <div class="section-image">
